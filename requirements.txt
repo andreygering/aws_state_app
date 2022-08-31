@@ -1,0 +1,5 @@
+uuid
+boto3
+botocore
+python-json-logger
+python-dotenv

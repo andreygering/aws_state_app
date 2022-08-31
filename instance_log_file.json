@@ -1,0 +1,9 @@
+{
+  "Name": "SupportBot_DB",
+  "Type": "t2.micro",
+  "State": "running",
+  "Private IP": "172.31.19.115",
+  "Public IP": "54.229.200.194",
+  "Launch Time": "2022-07-19 14:46:14+00:00",
+  "Request timestamp": "2022-08-30 19:58:54"
+}
