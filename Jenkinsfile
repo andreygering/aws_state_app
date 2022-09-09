@@ -1,20 +1,50 @@
 pipeline {
     agent any
-
+    
+    parameters {
+        string defaultValue: '500', name: 'INTERVAL'
+    }
+    
+    
     stages {
+        
+        
+        stage('CREATE ENV') {
+            steps {
+               sh "echo $ID >> .env"
+               sh "echo $ACCESS >> .env"
+            }
+        }
+    
         stage('GET SCM') {
             steps {
-                git 'https://github.com/andreygering/aws_state_app'
+               git branch: 'main', url: 'https://github.com/andreygering/aws_state_app/'
             }
         }
 
-        stage('Run Tests') {
+        stage('Build and Test') {
             steps {
-                echo "Running pylint and unittests" 
-                sh 'docker-compose up -d '
+                sh 'docker build -t aws_state_app:v-0.1.0.${BUILD_NUMBER} .'
             }
         }
-    }
+
+        stage('Tag Image') {
+            steps {
+                sh 'docker tag aws_state_app:v-0.1.0.${BUILD_NUMBER} andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                sh 'docker login -u ${USERNAME} -p ${PASSWORD} '
+            }
+        }
+        
+        
+        stage('Push Image') {
+            steps {
+                sh 'docker push andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+            }
+        }
+     }
 }
-
-
