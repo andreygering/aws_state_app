@@ -26,8 +26,7 @@ session = boto3.Session(
     aws_access_key_id=aws_access_key_id_env,
     aws_secret_access_key=aws_secret_access_key_env,
 )
-# aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
-# aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
+
 
 # Connect to EC2
 ec2 = session.resource('ec2', 'eu-west-1',
