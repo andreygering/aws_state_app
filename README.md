@@ -18,7 +18,7 @@ example: docker run -itd --name aws_state_app_<number of version> -v "$(pwd)":/u
 
 EXAMPLE with parameters: 
 ```
-docker build -t aws_app_run:v-0.1.0.1 /home/andrey/git/CarticaDevOps/.drafts/JB/project
+docker build -t aws_app_run:v-0.1.0.1 /home/usernmae/git/repo_name/
 ```
 ```
 docker run -itd --name aws_state_app_0_1_0_1 -v "$(pwd)":/usr/src/app aws_app_run:v-0.1.0.1 python aws_instanses
