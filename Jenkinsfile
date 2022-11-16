@@ -15,8 +15,8 @@ pipeline {
         
         stage('CREATE ENV') {
             steps {
-               sh "echo $ID >> .env"
-               sh "echo $ACCESS >> .env"
+               sh "echo KEY_ID=$ID >> .env"
+               sh "echo ACCESS_KEY=$ACCESS >> .env"
             }
         }
     
