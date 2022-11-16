@@ -13,7 +13,7 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
-INSTANCE_NAME = "SupportBot_DB"
+INSTANCE_NAME = "k8s.io/role/master"
 STATE = 'running' # Possible values: running, stopped, pending, stopping
 aws_access_key_id_env = os.environ['KEY_ID']
 aws_secret_access_key_env = os.environ['ACCESS_KEY']
