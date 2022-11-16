@@ -2,7 +2,9 @@ pipeline {
     agent any
     
     parameters {
-        string defaultValue: '500', name: 'INTERVAL'
+        string defaultValue: '500', name: 'INTERVAL',
+        string defaultValue: '500', name: 'ID',
+        string defaultValue: '500', name: 'ACCESS'
     }
     
     
