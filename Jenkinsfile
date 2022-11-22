@@ -3,10 +3,10 @@ pipeline {
     
     parameters {
         string defaultValue: '500', name: 'INTERVAL'
-        string defaultValue: 'None', name: 'ID'
-        string defaultValue: 'None', name: 'ACCESS'
-        string defaultValue: 'None', name: 'USERNAME'
-        string defaultValue: 'None', name: 'PASSWORD'
+        string defaultValue: '', name: 'ID'
+        string defaultValue: '', name: 'ACCESS'
+        string defaultValue: '', name: 'USERNAME'
+        string defaultValue: '', name: 'PASSWORD'
     }
     
     
