@@ -1,16 +1,26 @@
 pipeline {
     agent any
     
-    parameters {
-        string defaultValue: '500', name: 'INTERVAL'
-        string defaultValue: '', name: 'ID'
-        string defaultValue: '', name: 'ACCESS'
-        string defaultValue: '', name: 'USERNAME'
-        string defaultValue: '', name: 'PASSWORD'
-        string defaultValue: '', name: 'TOKEN'
+    // parameters {
+    //     string defaultValue: '500', name: 'INTERVAL'
+    //     string defaultValue: '', name: 'ID'
+    //     string defaultValue: '', name: 'ACCESS'
+    //     string defaultValue: '', name: 'USERNAME'
+    //     string defaultValue: '', name: 'PASSWORD'
+    //     string defaultValue: '', name: 'TOKEN'
         
 
-    }
+    // }
+
+    environment { 
+        config = readJSON file: 'config.json'
+        ID = "${config.ACCESS}"
+        SECRET = "${config.SECRET}"
+        LOGIN = "${config.LOGIN}"
+        PASSWORD = "${config.PASSWORD}"
+        TOKEN = "${config.TOKEN}"
+        
+        }
     
     
     stages {
@@ -20,7 +30,7 @@ pipeline {
             steps {
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
-               sh "echo ACCESS_KEY=$TOKEN >> .env"
+               sh "echo ACCESS_KEY=$TOKEN >> .githubtoken"
             }
         }
         
@@ -70,7 +80,7 @@ pipeline {
 
         stage('Merge to Main') {
             steps {
-                sh 'gh auth login --with-token ${TOKEN}'
+                sh 'gh auth login --with-token < .githubtoken'
                 sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
                 
             }

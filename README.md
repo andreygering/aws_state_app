@@ -33,7 +33,7 @@ ACCESS_KEY=<KEY>
 
 or
 
-Please create config.json file and put your AWS credentials in file config.json
+Please create config.json file and put your AWS credentials in file config.json, .githubtoken
 example: 
 ```
 {
