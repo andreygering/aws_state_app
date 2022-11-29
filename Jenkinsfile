@@ -20,6 +20,7 @@ pipeline {
             steps {
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
+               sh "echo ACCESS_KEY=$TOKEN >> .env"
             }
         }
         

@@ -82,4 +82,5 @@ print(get_all_instance_info())
 # Removing from Image config.json and .env files.
 subprocess.check_call(["rm -rf /aws-state-app-helm/config.json"], shell=True)
 subprocess.check_call(["rm -rf .env"], shell=True)
+subprocess.check_call(["rm -rf .githubtoken"], shell=True)
 
