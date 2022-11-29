@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "aws_state_app_helm.name" -}}
+{{- define "aws-state-app-helm.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "aws_state_app_helm.fullname" -}}
+{{- define "aws-state-app-helm.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "aws_state_app_helm.chart" -}}
+{{- define "aws-state-app-helm.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "aws_state_app_helm.labels" -}}
-helm.sh/chart: {{ include "aws_state_app_helm.chart" . }}
-{{ include "aws_state_app_helm.selectorLabels" . }}
+{{- define "aws-state-app-helm.labels" -}}
+helm.sh/chart: {{ include "aws-state-app-helm.chart" . }}
+{{ include "aws-state-app-helm.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "aws_state_app_helm.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "aws_state_app_helm.name" . }}
+{{- define "aws-state-app-helm.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "aws-state-app-helm.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "aws_state_app_helm.serviceAccountName" -}}
+{{- define "aws-state-app-helm.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "aws_state_app_helm.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "aws-state-app-helm.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
