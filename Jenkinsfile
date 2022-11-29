@@ -13,7 +13,7 @@ pipeline {
     // }
 
     environment { 
-        config = readJSON file: 'config.json'
+        config = readJSON file: 'aws_state_app/aws-state-app-helm/config.json'
         ID = "${config.ACCESS}"
         SECRET = "${config.SECRET}"
         LOGIN = "${config.LOGIN}"

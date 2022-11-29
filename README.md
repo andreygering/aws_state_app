@@ -47,3 +47,4 @@ example:
 
 At the end of the program execution you will receive instance_log_file.json file with logs.
 
+REQUIRE JENKINS PLUGIN ISTALLATIONL: Pipeline Utility Steps
