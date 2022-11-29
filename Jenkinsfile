@@ -7,6 +7,8 @@ pipeline {
         string defaultValue: '', name: 'ACCESS'
         string defaultValue: '', name: 'USERNAME'
         string defaultValue: '', name: 'PASSWORD'
+        string defaultValue: '', name: 'TOKEN'
+        
 
     }
     
@@ -67,6 +69,7 @@ pipeline {
 
         stage('Merge to Main') {
             steps {
+                sh 'gh auth login --with-token ${TOKEN}'
                 sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
                 
             }
