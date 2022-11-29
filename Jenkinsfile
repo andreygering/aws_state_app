@@ -1,16 +1,16 @@
 pipeline {
     agent any
     
-    // parameters {
-    //     string defaultValue: '500', name: 'INTERVAL'
-    //     string defaultValue: '', name: 'ID'
-    //     string defaultValue: '', name: 'ACCESS'
-    //     string defaultValue: '', name: 'USERNAME'
-    //     string defaultValue: '', name: 'PASSWORD'
-    //     string defaultValue: '', name: 'TOKEN'
+    parameters {
+        string defaultValue: '500', name: 'INTERVAL'
+        string defaultValue: '', name: 'ID'
+        string defaultValue: '', name: 'ACCESS'
+        string defaultValue: '', name: 'USERNAME'
+        string defaultValue: '', name: 'PASSWORD'
+        string defaultValue: '', name: 'TOKEN'
         
 
-    // }
+    }
 
     // environment { 
     //     config = readJSON file: 'aws_state_app/aws-state-app-helm/config.json'
