@@ -1,3 +1,4 @@
 .env
 config.json
 .drafts
+__pycache__
