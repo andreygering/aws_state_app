@@ -7,6 +7,9 @@ pipeline {
         string defaultValue: '', name: 'ACCESS'
         string defaultValue: '', name: 'USERNAME'
         string defaultValue: '', name: 'PASSWORD'
+        string defaultValue: '', name: 'SSHKEY_PRIVATE'
+        string defaultValue: '', name: 'SSHKEY_PUBLIC'
+
     }
     
     
@@ -17,6 +20,8 @@ pipeline {
             steps {
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
+               sh "echo $SSHKEY_PRIVATE >> ~/.ssh/id_ed25519"
+               sh "echo $SSHKEY_PUBLIC >> ~/.ssh/id_ed25519.pub"
             }
         }
         
@@ -54,6 +59,14 @@ pipeline {
         stage('Push Image') {
             steps {
                 sh 'docker push andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+            }
+        }
+
+        stage('Push to Main') {
+            steps {
+                sh 'git add .'
+                sh 'git commit -m "Commit annotation: aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+                sh 'git push origin/stage'
             }
         }
      }

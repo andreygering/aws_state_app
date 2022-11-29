@@ -37,10 +37,10 @@ Please create config.json file and put your AWS credentials in file config.json
 example: 
 ```
 {
-    "acess": "your acess key",
-    "secret": "your secret key",
-    "login": "your dokcerhub login",
-    "password": "your dokcerhub password"
+    "ACESS": "your acess key",
+    "SECRET": "your secret key",
+    "LOGIN": "your dokcerhub login",
+    "PASSWORD": "your dokcerhub password"
   
 }
 ```

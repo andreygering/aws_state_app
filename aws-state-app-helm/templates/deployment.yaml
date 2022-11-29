@@ -29,6 +29,22 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          env:
+          - name: INTERVAL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-configmap
+                key: INTERVAL
+          - name: ENV_ID
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-configmap
+                key: ID
+          - name: ENV_ACCESS
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-configmap
+                key: ACCESS
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
