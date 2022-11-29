@@ -62,7 +62,9 @@ pipeline {
             steps {
                 sh 'git add .'
                 sh 'git commit -m "Commit annotation: aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
+                sh 'git config --global user.email "gering.israel@gmail.com"'
                 sh 'git merge origin/stage'
+                
             }
         }
      }
