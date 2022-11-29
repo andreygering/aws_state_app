@@ -61,7 +61,7 @@ pipeline {
         stage('Push to Main') {
             steps {
                 sh 'git add .'
-                sh 'git commit -m "Commit annotation: aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+                sh 'git commit -m "Commit annotation: aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
                 sh 'git push origin/stage'
             }
         }
