@@ -12,15 +12,15 @@ pipeline {
 
     // }
 
-    environment { 
-        config = readJSON file: 'aws_state_app/aws-state-app-helm/config.json'
-        ACCESS = "${config.ACCESS}"
-        SECRET = "${config.SECRET}"
-        LOGIN = "${config.LOGIN}"
-        PASSWORD = "${config.PASSWORD}"
-        TOKEN = "${config.TOKEN}"
+    // environment { 
+    //     config = readJSON file: 'aws_state_app/aws-state-app-helm/config.json'
+    //     ACCESS = "${config.ACCESS}"
+    //     SECRET = "${config.SECRET}"
+    //     LOGIN = "${config.LOGIN}"
+    //     PASSWORD = "${config.PASSWORD}"
+    //     TOKEN = "${config.TOKEN}"
         
-        }
+    //     }
     
     
     stages {
