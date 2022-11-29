@@ -28,6 +28,7 @@ pipeline {
         
         stage('CREATE ENV') {
             steps {
+               sh "pwd && ls && l"
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
                sh "echo ACCESS_KEY=$TOKEN >> .githubtoken"
