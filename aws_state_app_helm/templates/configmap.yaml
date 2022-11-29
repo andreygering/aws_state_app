@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-state-app-configmap
+data:
+  acess: "Hello World"
+  secret: "Hello World"
+  login: "Hello World"
+  password: "Hello World"
+  
