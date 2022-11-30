@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: andreygering/aws_state_app
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
+  # Overrides the image tag whose default is the chart appVersion .
   tag: "0.90"
 imagePullSecrets: []
 nameOverride: ""
