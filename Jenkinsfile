@@ -25,14 +25,15 @@ pipeline {
     
     stages {
         
-        
+        // Comment and provide .env with proper parameters or imput by Jenkins
         stage('CREATE ENV') {
             steps {
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
                sh "rm -rf env_token.txt"
                sh "echo $TOKEN >> env_token.txt"
-               sh "echo {'tag':'$BUILD_NUMBER'} > config.json"
+               sh "echo TAG:$BUILD_NUMBER > configmap-env.yaml"
+               
 
             }
         }
@@ -66,9 +67,15 @@ pipeline {
                 sh 'docker login -u ${USERNAME} -p ${PASSWORD} '
             }
         }
+
+        stage('Update Helm Values') {
+            steps {
+                sh "yq -i   ' .Values.image.tag = ${BUILD_NUMBER} aws-state-app-helm/values.yaml"
+            }
+        }
         
         
-        stage('Push Image') {
+        stage('Push Image') { 
             steps {
                 sh 'docker push andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
             }

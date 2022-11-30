@@ -44,7 +44,12 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: {{ .Release.Name }}-configmap
-                key: SECRET  
+                key: SECRET
+          - name: ENV_TAG
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-configmap
+                key: TAG
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
