@@ -79,10 +79,10 @@ pipeline {
         }
     
 
-        stage('Merge to Main') {
+        stage('Create PR') {
             steps {
                 sh 'cat env_token.txt'
-                sh 'gh auth login --with-token < env_token.txt'
+                sh 'gh auth login --with-token < $TOKEN'
                 // sh 'git add .'
                 // sh 'git commit -m "${BUILD_NUMBER}"'
                 // sh 'git push https://${TOKEN}@github.com/andreygering/aws_state_app.git'
