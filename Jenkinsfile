@@ -58,7 +58,7 @@ pipeline {
 
         stage('Tag Image') {
             steps {
-                sh 'docker tag aws_state_app:v-0.1.0.${BUILD_NUMBER} andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+                sh 'docker tag aws_state_app:0.1.0.${BUILD_NUMBER} andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
             }
         }
 
@@ -70,7 +70,7 @@ pipeline {
 
         stage('Update Helm Values') {
             steps {
-                sh "yq -i   ' .Values.image.tag = ${BUILD_NUMBER} aws-state-app-helm/values.yaml"
+                sh "cd aws-state-app-helm && yq -i e '.image.tag |= 0.${BUILD_NUMBER}' values.yaml"
             }
         }
         
