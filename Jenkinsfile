@@ -25,14 +25,15 @@ pipeline {
     
     stages {
         
-        
+        // Comment and provide .env with proper parameters or imput by Jenkins
         stage('CREATE ENV') {
             steps {
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
                sh "rm -rf env_token.txt"
                sh "echo $TOKEN >> env_token.txt"
-               sh "echo {'tag':'$BUILD_NUMBER'} > config.json"
+               sh "echo TAG:$BUILD_NUMBER > configmap-env.yaml"
+               
 
             }
         }
@@ -51,13 +52,13 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                sh 'docker build -t aws_state_app:v-0.1.0.${BUILD_NUMBER} .'
+                sh 'docker build -t aws_state_app:0.${BUILD_NUMBER} .'
             }
         }
 
         stage('Tag Image') {
             steps {
-                sh 'docker tag aws_state_app:v-0.1.0.${BUILD_NUMBER} andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+                sh 'docker tag aws_state_app:0.${BUILD_NUMBER} andreygering/aws_state_app:0.${BUILD_NUMBER}'
             }
         }
 
@@ -66,11 +67,17 @@ pipeline {
                 sh 'docker login -u ${USERNAME} -p ${PASSWORD} '
             }
         }
-        
-        
-        stage('Push Image') {
+
+        stage('Update Helm Values') {
             steps {
-                sh 'docker push andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+                sh "cd aws-state-app-helm && yq -i e '.image.tag |= 0.${BUILD_NUMBER}' values.yaml"
+            }
+        }
+        
+        
+        stage('Push Image') { 
+            steps {
+                sh 'docker push andreygering/aws_state_app:0.${BUILD_NUMBER}'
             }
         }
 
@@ -85,7 +92,7 @@ pipeline {
             steps {
                 
                 sh 'gh auth login --with-token < env_token.txt'
-                sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
+                sh 'gh pr create --title "aws_state_app:0.${BUILD_NUMBER}" --body "aws_state_app:0.${BUILD_NUMBER}"'
                 
             }
         }
