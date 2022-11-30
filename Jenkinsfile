@@ -32,7 +32,6 @@ pipeline {
                sh "echo ACCESS_KEY=$ACCESS >> .env"
                sh "rm -rf env_token.txt"
                sh "echo $TOKEN >> env_token.txt"
-               sh "echo TAG:$BUILD_NUMBER > configmap-env.yaml"
                
 
             }
