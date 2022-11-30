@@ -31,7 +31,9 @@ pipeline {
                sh "pwd && ls && cd aws-state-app-helm && pwd && ls"
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
-               sh "echo TOKEN=$TOKEN >> env_token.txt"
+               sh "echo $TOKEN >> env_token.txt"
+               sh "echo {'tag':'$BUILD_NUMBER'} >> config.json"
+               sh "cat config.json"
             }
         }
         
@@ -79,13 +81,14 @@ pipeline {
         }
     
 
-        stage('Merge to Main') {
+        stage('Create PR') {
             steps {
-                // sh 'gh auth login --with-token < env_token.txt'
+            
+                //sh 'gh auth login --with-token < env_token.txt'
                 sh 'git add .'
-                sh 'git commit -m "${BUILD_NUMBER}"'
+                sh 'git commit -m "Build number: ${BUILD_NUMBER}"'
                 sh 'git push https://${TOKEN}@github.com/andreygering/aws_state_app.git'
-                // sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
+                //sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
                 
             }
         }
