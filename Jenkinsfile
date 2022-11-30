@@ -83,7 +83,8 @@ pipeline {
 
         stage('Create PR') {
             steps {
-            
+                
+                sh 'cat env_token.txt'
                 sh 'gh auth login --with-token < env_token.txt'
                 // sh 'git add .'
                 // sh 'git commit -m "Build number: ${BUILD_NUMBER}"'
