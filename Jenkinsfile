@@ -81,8 +81,11 @@ pipeline {
 
         stage('Merge to Main') {
             steps {
-                sh 'gh auth login --with-token < env_token.txt'
-                sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
+                // sh 'gh auth login --with-token < env_token.txt'
+                sh 'git add .'
+                sh 'git commit -m "$(BUILD_NUMBER)"'
+                sg 'git push'
+                // sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
                 
             }
         }
