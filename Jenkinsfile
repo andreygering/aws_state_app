@@ -43,7 +43,7 @@ pipeline {
     
         stage('GET SCM') {
             steps {
-               git branch: 'main', url: 'https://github.com/andreygering/aws_state_app/'
+               git branch: 'dev', url: 'https://github.com/andreygering/aws_state_app/'
             }
         }
 
