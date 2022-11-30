@@ -29,10 +29,10 @@ pipeline {
         stage('CREATE ENV') {
             steps {
                sh "pwd && ls && cd aws-state-app-helm && pwd && ls"
-               sh "echo KEY_ID=$ID >> .env"
-               sh "echo ACCESS_KEY=$ACCESS >> .env"
-               sh "echo $TOKEN >> env_token.txt"
-               sh "echo {'tag':'$BUILD_NUMBER'} >> config.json"
+               sh "echo KEY_ID=$ID > .env"
+               sh "echo ACCESS_KEY=$ACCESS > .env"
+               sh "echo $TOKEN > env_token.txt"
+               sh "echo {'tag':'$BUILD_NUMBER'} > config.json"
                sh "cat config.json"
             }
         }
