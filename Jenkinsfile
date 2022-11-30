@@ -7,7 +7,7 @@ pipeline {
         string defaultValue: '', name: 'ACCESS'
         string defaultValue: '', name: 'USERNAME'
         string defaultValue: '', name: 'PASSWORD'
-        string defaultValue: '', name: 'TOKEN'
+        string defaultValue: '', name: ''
         
 
     }
