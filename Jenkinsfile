@@ -7,7 +7,20 @@ pipeline {
         string defaultValue: '', name: 'ACCESS'
         string defaultValue: '', name: 'USERNAME'
         string defaultValue: '', name: 'PASSWORD'
+        string defaultValue: '', name: 'TOKEN'
+        
+
     }
+
+    // environment { 
+    //     config = readJSON file: 'aws_state_app/aws-state-app-helm/config.json'
+    //     ACCESS = "${config.ACCESS}"
+    //     SECRET = "${config.SECRET}"
+    //     LOGIN = "${config.LOGIN}"
+    //     PASSWORD = "${config.PASSWORD}"
+    //     TOKEN = "${config.TOKEN}"
+        
+    //     }
     
     
     stages {
@@ -15,8 +28,13 @@ pipeline {
         
         stage('CREATE ENV') {
             steps {
+               sh "pwd && ls && cd aws-state-app-helm && pwd && ls"
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
+               sh "rm -rf env_token.txt"
+               sh "echo $TOKEN >> env_token.txt"
+               sh "echo {'tag':'$BUILD_NUMBER'} > config.json"
+
             }
         }
         
@@ -28,7 +46,7 @@ pipeline {
     
         stage('GET SCM') {
             steps {
-               git branch: 'main', url: 'https://github.com/andreygering/aws_state_app/'
+               git branch: 'dev', url: 'https://github.com/andreygering/aws_state_app/'
             }
         }
 
@@ -54,6 +72,25 @@ pipeline {
         stage('Push Image') {
             steps {
                 sh 'docker push andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+            }
+        }
+
+        stage('Install GH') {
+            steps {
+               sh 'apt install gh'
+            }
+        }
+    
+
+        stage('Create PR') {
+            steps {
+                
+                sh 'gh auth login --with-token < env_token.txt'
+                // sh 'git add .'
+                // sh 'git commit -m "Build number: ${BUILD_NUMBER}"'
+                // sh 'git push https://${TOKEN}@github.com/andreygering/aws_state_app.git'
+                sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
+                
             }
         }
      }

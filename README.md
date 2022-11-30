@@ -25,12 +25,26 @@ docker run -itd --name aws_state_app_0_1_0_1 -v "$(pwd)":/usr/src/app aws_app_ru
 ```
 
 
-Please put quor AWS credentials in file .env
+Please put your AWS credentials in file .env 
 example: 
 KEY_ID=<ID>
 ACCESS_KEY=<KEY>
 
 
+or
 
+Please create config.json file and put your AWS credentials in file config.json, .githubtoken
+example: 
+```
+{
+    "ACESS": "your acess key",
+    "SECRET": "your secret key",
+    "LOGIN": "your dokcerhub login",
+    "PASSWORD": "your dokcerhub password"
+  
+}
+```
 
 At the end of the program execution you will receive instance_log_file.json file with logs.
+
+REQUIRE JENKINS PLUGIN ISTALLATIONL: Pipeline Utility Steps
