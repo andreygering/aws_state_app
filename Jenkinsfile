@@ -34,7 +34,7 @@ pipeline {
                sh "rm -rf env_token.txt"
                sh "echo $TOKEN >> env_token.txt"
                sh "echo {'tag':'$BUILD_NUMBER'} > config.json"
-               sh "cat config.json"
+
             }
         }
         
@@ -85,7 +85,6 @@ pipeline {
         stage('Create PR') {
             steps {
                 
-                sh 'cat env_token.txt'
                 sh 'gh auth login --with-token < env_token.txt'
                 // sh 'git add .'
                 // sh 'git commit -m "Build number: ${BUILD_NUMBER}"'
