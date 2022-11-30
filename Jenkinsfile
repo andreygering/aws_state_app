@@ -31,7 +31,7 @@ pipeline {
                sh "pwd && ls && cd aws-state-app-helm && pwd && ls"
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
-               sh "echo $TOKEN > env_token.txt"
+               sh 'echo ${TOKEN} > env_token.txt'
             }
         }
         
@@ -82,7 +82,7 @@ pipeline {
         stage('Create PR') {
             steps {
                 sh 'cat env_token.txt'
-                sh 'gh auth login --with-token < $TOKEN'
+                sh 'gh auth login --with-token < env_toke.txt'
                 // sh 'git add .'
                 // sh 'git commit -m "${BUILD_NUMBER}"'
                 // sh 'git push https://${TOKEN}@github.com/andreygering/aws_state_app.git'
