@@ -69,7 +69,7 @@ pipeline {
 
         stage('Update Helm Values') {
             steps {
-                sh "cd aws-state-app-helm && yq -i e '.image.tag |= 0.${BUILD_NUMBER}' values.yaml"
+                sh """cd aws-state-app-helm && yq -i e ".image.tag |= 0.${BUILD_NUMBER}" values.yaml"""
             }
         }
         
