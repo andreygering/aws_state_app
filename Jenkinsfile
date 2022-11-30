@@ -49,6 +49,12 @@ pipeline {
             }
         }
 
+        stage('Update Helm Values') {
+            steps {
+                sh """cd aws-state-app-helm && yq -i e ".image.tag |= 0.${BUILD_NUMBER}" values.yaml"""
+            }
+        }
+
         stage('Build and Test') {
             steps {
                 sh 'docker build -t aws_state_app:0.${BUILD_NUMBER} .'
@@ -64,12 +70,6 @@ pipeline {
         stage('Docker Login') {
             steps {
                 sh 'docker login -u ${USERNAME} -p ${PASSWORD} '
-            }
-        }
-
-        stage('Update Helm Values') {
-            steps {
-                sh """cd aws-state-app-helm && yq -i e ".image.tag |= 0.${BUILD_NUMBER}" values.yaml"""
             }
         }
         
