@@ -7,7 +7,7 @@ pipeline {
         string defaultValue: '', name: 'ACCESS'
         string defaultValue: '', name: 'USERNAME'
         string defaultValue: '', name: 'PASSWORD'
-        string defaultValue: '', name: ''
+        string defaultValue: '', name: 'TOKEN'
         
 
     }
@@ -43,7 +43,7 @@ pipeline {
     
         stage('GET SCM') {
             steps {
-               git branch: 'main', url: 'https://github.com/andreygering/aws_state_app/'
+               git branch: 'dev', url: 'https://github.com/andreygering/aws_state_app/'
             }
         }
 
