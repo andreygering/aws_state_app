@@ -33,7 +33,7 @@ pipeline {
                sh "echo ACCESS_KEY=$ACCESS >> .env"
                sh "echo $TOKEN >> env_token.txt"
                sh "echo {'tag':'$BUILD_NUMBER'} >> config.json"
-               sh "echo VERSION: 0.1.0.${BUILD_NUMBER} >> version.md"
+               sh "cat config.json"
             }
         }
         
