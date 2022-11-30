@@ -31,7 +31,7 @@ pipeline {
                sh "pwd && ls && cd aws-state-app-helm && pwd && ls"
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
-               sh "echo ACCESS_KEY=$TOKEN >> .githubtoken"
+               sh "echo TOKEN=$TOKEN >> .githubtoken"
             }
         }
         
