@@ -84,7 +84,7 @@ pipeline {
                 // sh 'gh auth login --with-token < env_token.txt'
                 sh 'git add .'
                 sh 'git commit -m "${BUILD_NUMBER}"'
-                sh 'git push origin HEAD:stage'
+                sh 'git push origin HEAD:master'
                 // sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
                 
             }
