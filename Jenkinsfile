@@ -52,13 +52,13 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                sh 'docker build -t aws_state_app:v-0.1.0.${BUILD_NUMBER} .'
+                sh 'docker build -t aws_state_app:0.${BUILD_NUMBER} .'
             }
         }
 
         stage('Tag Image') {
             steps {
-                sh 'docker tag aws_state_app:0.1.0.${BUILD_NUMBER} andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+                sh 'docker tag aws_state_app:0.${BUILD_NUMBER} andreygering/aws_state_app:0.${BUILD_NUMBER}'
             }
         }
 
@@ -77,7 +77,7 @@ pipeline {
         
         stage('Push Image') { 
             steps {
-                sh 'docker push andreygering/aws_state_app:v-0.1.0.${BUILD_NUMBER}'
+                sh 'docker push andreygering/aws_state_app:0.${BUILD_NUMBER}'
             }
         }
 
@@ -92,7 +92,7 @@ pipeline {
             steps {
                 
                 sh 'gh auth login --with-token < env_token.txt'
-                sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
+                sh 'gh pr create --title "aws_state_app:0.${BUILD_NUMBER}" --body "aws_state_app:0.${BUILD_NUMBER}"'
                 
             }
         }
