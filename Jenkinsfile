@@ -31,7 +31,7 @@ pipeline {
                sh "pwd && ls && cd aws-state-app-helm && pwd && ls"
                sh "echo KEY_ID=$ID >> .env"
                sh "echo ACCESS_KEY=$ACCESS >> .env"
-               sh "echo TOKEN=$TOKEN >> .githubtoken"
+               sh "echo TOKEN=$TOKEN >> env_token.txt"
             }
         }
         
@@ -81,7 +81,7 @@ pipeline {
 
         stage('Merge to Main') {
             steps {
-                sh 'gh auth login --with-token < .githubtoken'
+                sh 'gh auth login --with-token < env_token.txt'
                 sh 'gh pr create --title "aws_state_app:v-0.1.0.${BUILD_NUMBER}" --body "aws_state_app:v-0.1.0.${BUILD_NUMBER}"'
                 
             }
