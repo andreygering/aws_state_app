@@ -36,7 +36,8 @@ or
 Please create config.json file and put your AWS credentials in file config.json, .githubtoken
 example: 
 ```
-{
+{   
+    "INTERVAL": "500",
     "ACESS": "your acess key",
     "SECRET": "your secret key",
     "LOGIN": "your dokcerhub login",
